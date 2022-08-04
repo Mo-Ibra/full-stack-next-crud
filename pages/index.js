@@ -2,6 +2,8 @@ import { getNotes } from '../services/notesServices';
 
 import Link from 'next/link';
 
+import { AiOutlinePlaySquare, AiOutlinePlus } from 'react-icons/ai';
+
 function Home({ notes }) {
   return (
     <section className="py-10">
@@ -10,7 +12,7 @@ function Home({ notes }) {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {
             notes.map(note => (
-              <div key={note.id} className="p-4 border-slate-100 shadow-lg text-center rounded-md" style={{backgroundColor: '#21262d'}}>
+              <div key={note.id} className="p-4 border-slate-100 shadow-lg text-center rounded-md" style={{ backgroundColor: '#21262d' }}>
                 <h3 className="text-blue-500 font-semibold text-lg my-2">{note.name}</h3>
                 <p className="my-2 text-sm text-gray-400">{note.description}</p>
                 <div className="flex justify-between mt-5">
@@ -26,6 +28,11 @@ function Home({ notes }) {
           }
         </div>
       </div>
+      <Link href="/note-create">
+        <div className='fixed bottom-2 right-2 w-12 h-12 rounded-full bg-blue-500 text-white text-center cursor-pointer'>
+          <AiOutlinePlus className='text-center mx-auto mt-3 text-2xl' />
+        </div>
+      </Link>
     </section>
   )
 }

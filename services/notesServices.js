@@ -19,9 +19,10 @@ export async function createNote({ name, description, isDone }) {
     const response = await fetch(`${URL}/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name, description: description, isDone, isDone }),
+        body: JSON.stringify({ name: name, description: description, isDone: isDone }),
     });
-    return await response.json();
+    const data = await response.json();
+    return data;
 }
 
 /** Update Note */
