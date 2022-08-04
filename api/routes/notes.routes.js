@@ -59,7 +59,7 @@ router.get('/notes/:id', async (req, res) => {
             }
         });
 
-        res.status(200).json({ note: getNote });
+        res.status(200).json(getNote);
 
     } catch(err) {
 

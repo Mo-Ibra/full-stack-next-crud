@@ -10,7 +10,8 @@ export async function getNotes() {
 /** Get Specific Note */
 export async function getNote(id) {
     const response = await fetch(`${URL}/notes/${id}`);
-    return await response.json();
+    const data = await response.json();
+    return data;
 }
 
 /** Create Note */
