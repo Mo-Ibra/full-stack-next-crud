@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { updateNote, getNote, getNotes } from "../../services/notesServices";
 
+import { ToastContainer, toast } from 'react-toastify';
+
 function NoteEdit({ note }) {
 
     const [name, setName] = useState(note.name);
@@ -14,7 +16,7 @@ function NoteEdit({ note }) {
 
         const update = await updateNote({name, description, isDone: true, id: note.id});
 
-        console.log(update);
+        toast.success(update.message);
     }
 
     return (
@@ -41,6 +43,7 @@ function NoteEdit({ note }) {
                     <button className="mx-auto text-center rounded-sm bg-blue-500 py-1 px-4 text-white">Update!</button>
                 </form>
             </div>
+            <ToastContainer />
         </section>
     )
 }

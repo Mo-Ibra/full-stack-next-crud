@@ -1,10 +1,19 @@
-import { getNotes } from '../services/notesServices';
+import { deleteNote, getNotes } from '../services/notesServices';
 
 import Link from 'next/link';
 
-import { AiOutlinePlaySquare, AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai';
+
+import { ToastContainer, toast } from 'react-toastify';
 
 function Home({ notes }) {
+
+  const deleteHanlder = async (id) => {
+    const note = await deleteNote(id);
+    console.log(note.message);
+    toast.success(note.message);
+  }
+
   return (
     <section className="py-10">
       <div className="container mx-auto px-10">
@@ -21,7 +30,7 @@ function Home({ notes }) {
                   >
                     <button className="bg-blue-500 text-white py-1 px-4 text-sm rounded-sm">Edit</button>
                   </Link>
-                  <button className="border border-red-500 text-red-500 py-1 px-4 text-sm rounded-sm hover:bg-red-500 hover:text-white duration-300">Delete</button>
+                  <button className="border border-red-500 text-red-500 py-1 px-4 text-sm rounded-sm hover:bg-red-500 hover:text-white duration-300" onClick={() => deleteHanlder(note.id)}>Delete</button>
                 </div>
               </div>
             ))
@@ -33,6 +42,7 @@ function Home({ notes }) {
           <AiOutlinePlus className='text-center mx-auto mt-3 text-2xl' />
         </div>
       </Link>
+      <ToastContainer />
     </section>
   )
 }

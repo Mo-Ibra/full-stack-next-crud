@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { createNote } from "../services/notesServices";
 
-function NoteEdit({ note }) {
+import { ToastContainer, toast } from 'react-toastify';
+
+function NoteCreate() {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -12,9 +14,20 @@ function NoteEdit({ note }) {
 
         // const data = { name, description };
 
-        const note = createNote({ name: name, description: description, isDone: true });
+        try {
 
-        console.log(note);
+            const note = createNote({ name: name, description: description, isDone: true });
+
+            note.then(data => {
+                toast.success(data.message);
+            });
+    
+            setName('');
+            setDescription('');
+
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -41,8 +54,9 @@ function NoteEdit({ note }) {
                     <button className="mx-auto text-center rounded-sm bg-blue-500 py-1 px-4 text-white">Create</button>
                 </form>
             </div>
+            <ToastContainer />
         </section>
     )
 }
 
-export default NoteEdit;
+export default NoteCreate;
